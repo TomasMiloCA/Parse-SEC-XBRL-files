@@ -2,7 +2,6 @@ import os
 import pandas as pd
 
 def load_tsvs(main_folder):
-    dfs = []  # list to store DataFrames
     tag_data=[]
     pre_data=[]
     num_data=[]
