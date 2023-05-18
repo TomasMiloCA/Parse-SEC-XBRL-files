@@ -1,0 +1,40 @@
+import os
+import pandas as pd
+
+def load_tsvs(main_folder):
+    dfs = []  # list to store DataFrames
+    tag_data=[]
+    pre_data=[]
+    num_data=[]
+    sub_data=[]
+
+    for root, dirs, files in os.walk(main_folder):
+        for file in files:
+            if file == 'tag.tsv':
+                file_path = os.path.join(root, file)
+                df = pd.read_csv(file_path, sep='\t',low_memory=False,on_bad_lines="skip")  # read the tsv file into DataFrame
+                tag_data.append(df)
+            elif file == 'pre.tsv':
+                file_path = os.path.join(root, file)
+                df = pd.read_csv(file_path, sep='\t',low_memory=False,on_bad_lines="skip")  # read the tsv file into DataFrame
+                pre_data.append(df)
+            elif file == 'num.tsv':
+                file_path = os.path.join(root, file)
+                df = pd.read_csv(file_path, sep='\t',low_memory=False,on_bad_lines="skip")  # read the tsv file into DataFrame
+                num_data.append(df)
+            elif file == 'sub.tsv':
+                file_path = os.path.join(root, file)
+                df = pd.read_csv(file_path, sep='\t',low_memory=False,on_bad_lines="skip")  # read the tsv file into DataFrame
+                sub_data.append(df)
+                
+    # Concatenate all dataframes
+    tag_df = pd.concat(tag_data, ignore_index=True)
+    pre_df = pd.concat(pre_data, ignore_index=True)
+    num_df = pd.concat(num_data, ignore_index=True)
+    sub_df = pd.concat(sub_data, ignore_index=True)
+    
+    return tag_df,pre_df,num_df,sub_df
+
+
+main_folder = 'ENTER YOUR PATH HERE'
+tag_df,pre_df,num_df,sub_df = load_tsvs(main_folder)
